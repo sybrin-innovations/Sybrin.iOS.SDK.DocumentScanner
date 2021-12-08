@@ -1,0 +1,11 @@
+framework module Sybrin_iOS_DocumentScanner {
+  umbrella header "Sybrin_iOS_DocumentScanner.h"
+
+  export *
+  module * { export * }
+}
+
+module Sybrin_iOS_DocumentScanner.Swift {
+    header "Sybrin_iOS_DocumentScanner-Swift.h"
+    requires objc
+}
