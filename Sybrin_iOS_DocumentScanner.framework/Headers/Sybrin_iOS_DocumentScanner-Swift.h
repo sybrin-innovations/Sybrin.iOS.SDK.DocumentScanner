@@ -251,18 +251,18 @@ SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner18ImagePickerHandler")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@class UIPresentationController;
-
-@interface ImagePickerHandler (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner)) <UIAdaptivePresentationControllerDelegate>
-- (void)presentationControllerWillDismiss:(UIPresentationController * _Nonnull)presentationController;
-- (void)presentationControllerDidDismiss:(UIPresentationController * _Nonnull)presentationController;
-@end
-
 @class UIImagePickerController;
 
 @interface ImagePickerHandler (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner)) <UIImagePickerControllerDelegate>
 - (void)imagePickerControllerDidCancel:(UIImagePickerController * _Nonnull)picker;
 - (void)imagePickerController:(UIImagePickerController * _Nonnull)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info;
+@end
+
+@class UIPresentationController;
+
+@interface ImagePickerHandler (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner)) <UIAdaptivePresentationControllerDelegate>
+- (void)presentationControllerWillDismiss:(UIPresentationController * _Nonnull)presentationController;
+- (void)presentationControllerDidDismiss:(UIPresentationController * _Nonnull)presentationController;
 @end
 
 @class NSBundle;
@@ -305,6 +305,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) SybrinDocume
 
 
 
+
+
+@interface UINavigationController (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner))
+@property (nonatomic, readonly) BOOL shouldAutorotate;
+@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
+@end
 
 
 #if __has_attribute(external_source_symbol)
