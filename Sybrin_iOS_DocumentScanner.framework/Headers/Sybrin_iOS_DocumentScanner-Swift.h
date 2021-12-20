@@ -225,7 +225,7 @@ SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner9DataModel")
 
 SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner24AddressDocumentDataModel")
 @interface AddressDocumentDataModel : DataModel
-@property (nonatomic, readonly, copy) NSString * _Nullable rawData;
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nullable addresses;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -240,30 +240,8 @@ SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner17DocumentDataModel")
 @end
 
 typedef SWIFT_ENUM(NSInteger, DocumentType, closed) {
-  DocumentTypeDocument = 0,
-  DocumentTypeAddressDocument = 1,
+  DocumentTypeAddressDocument = 0,
 };
-
-
-SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner18ImagePickerHandler")
-@interface ImagePickerHandler : NSObject <UINavigationControllerDelegate>
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-@class UIImagePickerController;
-
-@interface ImagePickerHandler (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner)) <UIImagePickerControllerDelegate>
-- (void)imagePickerControllerDidCancel:(UIImagePickerController * _Nonnull)picker;
-- (void)imagePickerController:(UIImagePickerController * _Nonnull)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info;
-@end
-
-@class UIPresentationController;
-
-@interface ImagePickerHandler (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner)) <UIAdaptivePresentationControllerDelegate>
-- (void)presentationControllerWillDismiss:(UIPresentationController * _Nonnull)presentationController;
-- (void)presentationControllerDidDismiss:(UIPresentationController * _Nonnull)presentationController;
-@end
 
 @class NSBundle;
 @class NSCoder;
@@ -294,23 +272,47 @@ SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner22ImageScannerController")
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
 @end
 
+@class SybrinDocumentScannerConfiguration;
 
 SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner21SybrinDocumentScanner")
 @interface SybrinDocumentScanner : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) SybrinDocumentScanner * _Nonnull shared;)
 + (SybrinDocumentScanner * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, strong) SybrinDocumentScannerConfiguration * _Nullable configuration;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UIColor;
+
+SWIFT_CLASS("_TtC26Sybrin_iOS_DocumentScanner34SybrinDocumentScannerConfiguration")
+@interface SybrinDocumentScannerConfiguration : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull license;
+@property (nonatomic, strong) UIColor * _Nonnull primaryColor;
+@property (nonatomic, copy) NSString * _Nonnull environmentKey;
+@property (nonatomic) BOOL displayToastMessages;
+@property (nonatomic, copy) NSString * _Nullable correlationID;
+- (nonnull instancetype)initWithLicense:(NSString * _Nonnull)license OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
 
 
+
+@class UIPresentationController;
+
+@interface UIImagePickerController (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner)) <UIAdaptivePresentationControllerDelegate>
+- (void)presentationControllerWillDismiss:(UIPresentationController * _Nonnull)presentationController;
+- (void)presentationControllerDidDismiss:(UIPresentationController * _Nonnull)presentationController;
+@end
 
 
 @interface UINavigationController (SWIFT_EXTENSION(Sybrin_iOS_DocumentScanner))
 @property (nonatomic, readonly) BOOL shouldAutorotate;
 @property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
 @end
+
 
 
 #if __has_attribute(external_source_symbol)
